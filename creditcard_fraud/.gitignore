@@ -1,5 +1,9 @@
-# Data
-/data/
+# Data (ignore contents; DVC pointer files *.dvc must be tracked)
+/data/*
+!/data/raw/
+/data/raw/*
+!/data/raw/*.dvc
+/data/processed/
 
 # Mac OS-specific storage files
 .DS_Store

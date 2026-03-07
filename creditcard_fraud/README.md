@@ -27,7 +27,7 @@
 │                         `1.0-jqp-initial-data-exploration`.
 │
 ├── pyproject.toml     <- Project configuration file with package metadata for 
-│                         {{ cookiecutter.module_name }} and configuration for tools like black
+│                         creditcard_fraud and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
 │
@@ -39,9 +39,9 @@
 │
 ├── setup.cfg          <- Configuration file for flake8
 │
-└── {{ cookiecutter.module_name }}   <- Source code for use in this project.
+└── creditcard_fraud   <- Source code for use in this project.
     │
-    ├── __init__.py             <- Makes {{ cookiecutter.module_name }} a Python module
+    ├── __init__.py             <- Makes creditcard_fraud a Python module
     │
     ├── config.py               <- Store useful variables and configuration
     │

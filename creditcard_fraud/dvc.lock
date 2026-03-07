@@ -1,0 +1,26 @@
+schema: '2.0'
+stages:
+  prepare_data:
+    cmd: python -m creditcard_fraud.dataset
+    deps:
+    - path: creditcard_fraud/config.py
+      hash: md5
+      md5: a31a5b75d6d1523cc4cd2a394824fb37
+      size: 819
+    - path: creditcard_fraud/dataset.py
+      hash: md5
+      md5: 159612cca6881c714c26944b2db9f180
+      size: 2107
+    - path: data/raw/dataset
+      hash: md5
+      md5: d7d4434708894b1d786706505defd2fe
+      size: 156435299
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 03d0941655289a0e309fb0e29fa68d7e
+      size: 43614807
+    - path: data/processed/train.csv
+      hash: md5
+      md5: c859ebe676d4f119f79ed3056e5b17ca
+      size: 101773372

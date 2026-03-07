@@ -1,0 +1,2 @@
+   # Описательная статистика по Amount в разрезе классов
+   df.groupby("Class")["Amount"].describe()

@@ -63,15 +63,15 @@ format:
 ## Lint using flake8, black, and isort (use `make format` to do formatting)
 .PHONY: lint
 lint:
-	flake8 {{ cookiecutter.module_name }}
-	isort --check --diff {{ cookiecutter.module_name }}
-	black --check {{ cookiecutter.module_name }}
+	flake8 creditcard_fraud
+	isort --check --diff creditcard_fraud
+	black --check creditcard_fraud
 
 ## Format source code with black
 .PHONY: format
 format:
-	isort {{ cookiecutter.module_name }}
-	black {{ cookiecutter.module_name }}
+	isort creditcard_fraud
+	black creditcard_fraud
 {% endif %}
 
 {% if cookiecutter.testing_framework != 'none' %}
@@ -159,7 +159,7 @@ create_environment:
 ## Make dataset
 .PHONY: data
 data: requirements
-	$(PYTHON_INTERPRETER) {{ cookiecutter.module_name }}/dataset.py
+	$(PYTHON_INTERPRETER) creditcard_fraud/dataset.py
 {% endif %}
 
 #################################################################################

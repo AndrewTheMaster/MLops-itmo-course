@@ -1,0 +1,12 @@
+stages:
+  prepare_data:
+    cmd: python -m creditcard_fraud.dataset
+    deps:
+      - data/raw/dataset
+      - creditcard_fraud/dataset.py
+      - creditcard_fraud/config.py
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+
+
