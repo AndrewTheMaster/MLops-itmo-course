@@ -18,6 +18,9 @@ EXTERNAL_DATA_DIR = DATA_DIR / "external"
 
 MODELS_DIR = PROJ_ROOT / "models"
 
+# Локальный file-store MLflow (не `mlruns/` — он часто монтируется из Docker и бывает не writable)
+MLFLOW_FILE_STORE = PROJ_ROOT / ".mlruns"
+
 REPORTS_DIR = PROJ_ROOT / "reports"
 FIGURES_DIR = REPORTS_DIR / "figures"
 

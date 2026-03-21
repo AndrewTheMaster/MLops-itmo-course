@@ -4,6 +4,12 @@
 /data/raw/*
 !/data/raw/*.dvc
 /data/processed/
+/data/interim/
+
+mlruns/
+.mlruns/
+/models/*.pkl
+/models/model_meta.json
 
 # Mac OS-specific storage files
 .DS_Store

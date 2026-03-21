@@ -1,12 +1,31 @@
 stages:
-  prepare_data:
-    cmd: python -m creditcard_fraud.dataset
+  load_data:
+    cmd: python -m creditcard_fraud.load_data
     deps:
       - data/raw/dataset
-      - creditcard_fraud/dataset.py
+      - creditcard_fraud/load_data.py
+      - creditcard_fraud/config.py
+    outs:
+      - data/interim/dataset.csv
+
+  preprocess:
+    cmd: python -m creditcard_fraud.preprocess
+    deps:
+      - data/interim/dataset.csv
+      - creditcard_fraud/preprocess.py
+      - creditcard_fraud/ge_validation.py
       - creditcard_fraud/config.py
     outs:
       - data/processed/train.csv
       - data/processed/test.csv
 
-
+  train:
+    cmd: python -m creditcard_fraud.modeling.train
+    deps:
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - creditcard_fraud/modeling/train.py
+      - creditcard_fraud/config.py
+    outs:
+      - models/model.pkl
+      - models/model_meta.json

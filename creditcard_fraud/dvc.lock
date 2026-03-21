@@ -24,3 +24,79 @@ stages:
       hash: md5
       md5: c859ebe676d4f119f79ed3056e5b17ca
       size: 101773372
+  load_data:
+    cmd: python -m creditcard_fraud.load_data
+    deps:
+    - path: creditcard_fraud/config.py
+      hash: md5
+      md5: 677fc17cd4dd1969116f6ab22fd8ae9d
+      size: 1003
+    - path: creditcard_fraud/load_data.py
+      hash: md5
+      md5: cba4fa0afb659c038edb103eb0ea1d65
+      size: 1764
+    - path: data/raw/dataset
+      hash: md5
+      md5: d7d4434708894b1d786706505defd2fe
+      size: 156435299
+    outs:
+    - path: data/interim/dataset.csv
+      hash: md5
+      md5: d27e42e8cafe7d4d4ce303715763d3fe
+      size: 155863920
+  preprocess:
+    cmd: python -m creditcard_fraud.preprocess
+    deps:
+    - path: creditcard_fraud/config.py
+      hash: md5
+      md5: 677fc17cd4dd1969116f6ab22fd8ae9d
+      size: 1003
+    - path: creditcard_fraud/ge_validation.py
+      hash: md5
+      md5: ecc13d6551566abbf4e561050e065e59
+      size: 1150
+    - path: creditcard_fraud/preprocess.py
+      hash: md5
+      md5: b7634eed63fcdabe138301699f9c8bdd
+      size: 2168
+    - path: data/interim/dataset.csv
+      hash: md5
+      md5: d27e42e8cafe7d4d4ce303715763d3fe
+      size: 155863920
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 915ecc76d440ca102bc57e22ef004618
+      size: 42709698
+    - path: data/processed/train.csv
+      hash: md5
+      md5: ee4427a229de19201f7f05298114f59b
+      size: 99663965
+  train:
+    cmd: python -m creditcard_fraud.modeling.train
+    deps:
+    - path: creditcard_fraud/config.py
+      hash: md5
+      md5: 677fc17cd4dd1969116f6ab22fd8ae9d
+      size: 1003
+    - path: creditcard_fraud/modeling/train.py
+      hash: md5
+      md5: 4a13227abaa345f5b0f4d33f399a13cf
+      size: 4375
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 915ecc76d440ca102bc57e22ef004618
+      size: 42709698
+    - path: data/processed/train.csv
+      hash: md5
+      md5: ee4427a229de19201f7f05298114f59b
+      size: 99663965
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: ea80dd0b07e3f884e06983987adff1eb
+      size: 1711
+    - path: models/model_meta.json
+      hash: md5
+      md5: 29f10316e5623484c238e77bc83b4cfa
+      size: 430

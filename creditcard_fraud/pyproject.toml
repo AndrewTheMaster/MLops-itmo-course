@@ -4,43 +4,11 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "creditcard_fraud"
-version = "0.0.1"
-description = {{ cookiecutter.description|tojson }}
-authors = [
-  { name = {{ cookiecutter.author_name|tojson }} },
-]
-{% if cookiecutter.open_source_license != 'No license file' %}license = { file = "LICENSE" }{% endif %}
+version = "0.1.0"
+description = "MLOps: детекция мошеннических транзакций (OpenML Credit Card Fraud)."
 readme = "README.md"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    {% if cookiecutter.open_source_license == 'MIT' %}"License :: OSI Approved :: MIT License"{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}"License :: OSI Approved :: BSD License"{% endif %}
-]
-{% if cookiecutter.linting_and_formatting == 'flake8+black+isort' %}
-[tool.black]
-line-length = 99
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.git
-  | \.venv
-)/
-'''
+requires-python = ">=3.11"
+authors = [{ name = "ITMO MLOps" }]
 
-[tool.isort]
-profile = "black"
-known_first_party = ["creditcard_fraud"]
-force_sort_within_sections = true
-{% endif %}
-{% if cookiecutter.linting_and_formatting == 'ruff' %}
-[tool.ruff]
-line-length = 99
-src = ["creditcard_fraud"]
-include = ["pyproject.toml", "creditcard_fraud/**/*.py"]
-
-[tool.ruff.lint]
-extend-select = ["I"]  # Add import sorting
-
-[tool.ruff.lint.isort]
-known-first-party = ["creditcard_fraud"]
-force-sort-within-sections = true
-{% endif %}
+[tool.flit.module]
+name = "creditcard_fraud"
