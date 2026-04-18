@@ -1,6 +1,6 @@
 {
-  "model_name": "LogisticRegression",
-  "recall_fraud": 0.9416666666666667,
+  "model_name": "RandomForestClassifier",
+  "recall_fraud": null,
   "feature_columns": [
     "Time",
     "V1",
@@ -32,5 +32,6 @@
     "V27",
     "V28",
     "Amount"
-  ]
+  ],
+  "note": "\u0421\u0435\u0440\u0432\u0438\u043d\u0433: RF \u0434\u043b\u044f \u0440\u0430\u0437\u043c\u0435\u0440\u0430 \u0430\u0440\u0442\u0435\u0444\u0430\u043a\u0442\u0430 ~\u043a\u0430\u043a \u043d\u0430 \u043f\u0430\u0440\u0435; \u043c\u0435\u0442\u0440\u0438\u043a\u0438 \u0441\u043c. MLflow train"
 }
