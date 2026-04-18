@@ -8,8 +8,7 @@
 
 mlruns/
 .mlruns/
-/models/*.pkl
-/models/model_meta.json
+# Курс / CI: модель и meta коммитим в репозиторий (~8 MB), см. models/
 
 # Mac OS-specific storage files
 .DS_Store
