@@ -25,6 +25,18 @@ def run_preprocess(
     skip_ge: bool = False,
 ) -> None:
     df = pd.read_csv(input_path)
+    if df.empty:
+        raise ValueError("Input dataset is empty.")
+    if "Amount" not in df.columns or "Class" not in df.columns:
+        raise ValueError("Input dataset must contain 'Amount' and 'Class' columns.")
+
+    df["Amount"] = pd.to_numeric(df["Amount"], errors="coerce")
+    if df["Amount"].isna().all():
+        raise ValueError("Column 'Amount' is invalid: all values are NaN after conversion.")
+
+    if df["Class"].nunique(dropna=False) < 2:
+        raise ValueError("Target column 'Class' must contain at least two classes.")
+
     df["Class"] = df["Class"].astype(int)
     if not skip_ge:
         validate_interim_fraud_dataset(df)

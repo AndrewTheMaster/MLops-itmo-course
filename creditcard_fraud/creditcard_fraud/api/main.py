@@ -7,7 +7,7 @@ from functools import lru_cache
 from fastapi import FastAPI, HTTPException
 import joblib
 import pandas as pd
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from creditcard_fraud.config import MODELS_DIR
 
@@ -73,10 +73,17 @@ class PredictBody(BaseModel):
         ..., description="Все признаки из model_meta.json (train без Class): Time, V1…V28, Amount."
     )
 
+    @field_validator("features")
+    @classmethod
+    def validate_features(cls, features: dict[str, float]) -> dict[str, float]:
+        if not features:
+            raise ValueError("features must not be empty")
+        return features
+
 
 class PredictOut(BaseModel):
     prediction: int
-    fraud_proba: float | None = None
+    fraud_probability: float | None = None
 
 
 @lru_cache(maxsize=1)
@@ -107,14 +114,17 @@ def predict(body: PredictBody):
         raise HTTPException(status_code=503, detail=str(e)) from e
     cols = meta["feature_columns"]
     missing = [c for c in cols if c not in body.features]
-    if missing:
+    extra = [c for c in body.features if c not in cols]
+    if missing or extra:
         raise HTTPException(
             status_code=400,
             detail={
-                "error": "missing_features",
-                "message": "В features должны быть все ключи из model_meta.json (без Class).",
+                "error": "invalid_feature_set",
+                "message": "В features должны быть все и только ключи из model_meta.json (без Class).",
                 "missing": missing[:15],
                 "missing_count": len(missing),
+                "extra": extra[:15],
+                "extra_count": len(extra),
                 "expected_columns": cols,
             },
         )
@@ -123,4 +133,4 @@ def predict(body: PredictBody):
     proba = None
     if hasattr(model, "predict_proba"):
         proba = float(model.predict_proba(row)[0, 1])
-    return PredictOut(prediction=pred, fraud_proba=proba)
+    return PredictOut(prediction=pred, fraud_probability=proba)
