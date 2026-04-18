@@ -7,7 +7,7 @@ name = "creditcard_fraud"
 version = "0.1.0"
 description = "MLOps: детекция мошеннических транзакций (OpenML Credit Card Fraud)."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 authors = [{ name = "ITMO MLOps" }]
 
 [tool.flit.module]
